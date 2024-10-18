@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspaces/UI_Coursework/cwk1_files/dataset.cpp
+vector
+-
+dataset.hpp
+/workspaces/UI_Coursework/cwk1_files/dataset.hpp
+
+/workspaces/UI_Coursework/cwk1_files/dataset.hpp
+vector
+-
+quake.hpp
+/workspaces/UI_Coursework/cwk1_files/quake.hpp
+
+/workspaces/UI_Coursework/cwk1_files/quake.hpp
+string
+-
+iostream
+-
+

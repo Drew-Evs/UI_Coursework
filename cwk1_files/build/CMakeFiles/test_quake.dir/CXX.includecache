@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspaces/UI_Coursework/cwk1_files/quake.cpp
+stdexcept
+-
+quake.hpp
+/workspaces/UI_Coursework/cwk1_files/quake.hpp
+
+/workspaces/UI_Coursework/cwk1_files/quake.hpp
+string
+-
+iostream
+-
+
