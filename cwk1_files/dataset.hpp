@@ -11,9 +11,9 @@ class QuakeDataset
     // Specify prototypes or inlined methods here
     // (see UML diagram for what is required)
     QuakeDataset();
-    QuakeDataset(const std::string& file) : filename(file) {}
-    void loadData(std::string);
-    int size() { return data.size(); }
+    QuakeDataset(const std::string& file) { loadData(file); }
+    void loadData(const std::string&);
+    int size() const { return data.size(); }
     Quake operator[](int index) { return data.at(index) ; }
     Quake strongest();
     Quake shallowest();
@@ -22,5 +22,4 @@ class QuakeDataset
 
   private:
     std::vector<Quake> data;
-    std::string filename;
 };

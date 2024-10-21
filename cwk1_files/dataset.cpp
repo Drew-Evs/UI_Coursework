@@ -1,36 +1,82 @@
 // COMP2811 Coursework 1: QuakeDataset class
 #include <vector>
+#include <stdexcept>
 #include "dataset.hpp"
 #include "csv.hpp"
 
 QuakeDataset::QuakeDataset() {}
 
-void QuakeDataset::loadData(std::string filename) {
-    csv::CSVReader reader(filename);
+void QuakeDataset::loadData(const std::string& file) {
+    csv::CSVReader reader(file);
 
     for (auto& row: reader) {
-        std::string time = row["A"].get<>();
-        double lat = row["B"].get<double>();
-        double lon = row["C"].get<double>();
-        double depth = row["D"].get<double>();
-        double mag = row["E"].get<double>();
-        Quake temp(time,lat,lon,depth,mag);
+        std::string time = row["time"].get<std::string>(); 
+        double lat = row["latitude"].get<double>();
+        double lon = row["longitude"].get<double>();
+        double depth = row["depth"].get<double>();
+        double mag = row["mag"].get<double>();
+
+        Quake temp(time, lat, lon, depth, mag);
         data.push_back(temp);
     }
 }
 
 Quake QuakeDataset::strongest() {
-    return Quake("Test",1,1,1,1);
+    if (data.size() != 0) {
+        Quake strong_quake = data[0];
+        double strongest = 0;
+        for (int i=0; i<data.size(); i++) {
+            if (strongest < data[i].getMagnitude()) {
+                strongest = data[i].getMagnitude();
+                strong_quake = data[i];
+            }
+        }
+        return strong_quake;
+    } else {
+        throw std::invalid_argument("Empty dataset");
+    }
 }
 
 Quake QuakeDataset::shallowest() {
-    return Quake("Test",1,1,1,1);
+   if (data.size() != 0) {
+        Quake shallow_quake = data[0];
+        double shallow = data[0].getDepth();
+        for (int i=0; i<data.size(); i++) {
+            if (shallow > data[i].getDepth()) {
+                shallow = data[i].getDepth();
+                shallow_quake = data[i];
+            }
+        }
+        return shallow_quake;
+    } else {
+        throw std::invalid_argument("Empty dataset");
+    }
 }
 
 double QuakeDataset::meanDepth() {
-    return 0;
+    if (data.size() != 0) {
+        double mean = 0;
+        for (int i=0; i<data.size(); i++) {
+            mean = mean + data[i].getDepth();
+        }
+        mean = mean/data.size();
+        return mean;
+    } else {
+        throw std::invalid_argument("Empty dataset");
+    }
 }
 
+
 double QuakeDataset::meanMagnitude() {
-    return 0;
+    if (data.size() != 0) {
+        double mean = 0;
+        for (int i=0; i<data.size(); i++) {
+            mean = mean + data[i].getMagnitude();
+        }
+        mean = mean/data.size();
+        return mean;
+    } else {
+        throw std::invalid_argument("Empty dataset");
+    }
 }
+
